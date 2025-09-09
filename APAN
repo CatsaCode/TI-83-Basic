@@ -1,0 +1,74 @@
+:"Pan with        arrow keys
+:"Zoom with       + and -
+:"Set precision   with 1-9
+:"Set live        updates with   ENTER/GRAPH
+:
+:
+:
+:
+:
+:"P precision
+:"L live
+:"D need redraw
+:"K key
+:"W width
+:"H height
+:"U center X
+:"V center Y
+:
+:2→P
+:1→L
+:1→D
+:While 1
+:getKey→K
+:Xmax-Xmin→W
+:Ymax-Ymin→H
+:(Xmin+Xmax)/2→U
+:(Ymin+Ymax)/2→V
+:If K=45:Then
+::Stop
+:End
+:If L and D and K=0:Then
+::0→D
+::DispGraph
+:End
+:If K=24:Then
+::Xmin-W/P→Xmin
+::Xmax-W/P→Xmax
+::1→D
+:End
+:If K=26:Then
+::Xmin+W/P→Xmin
+::Xmax+W/P→Xmax
+::1→D
+:End
+:If K=25:Then
+::Ymin+H/P→Ymin
+::Ymax+H/P→Ymax
+::1→D
+:End
+:If K=24:Then
+::Ymin-H/P→Ymin
+::Ymax-H/P→Ymax
+::1→D
+:End
+:If K=85:Then
+::U-W/2-(W/P)→Xmin
+::U+W/2+(W/P)→Xmax
+::V-H/2-(H/P)→Ymin
+::V+H/2+(H/P)→Ymax
+::1→D
+:End
+:If K=95:Then
+::U-W/2+(W/(P+2))→Xmin
+::U+W/2-(W/(P+2))→Xmax
+::V-H/2+(H/(P+2))→Ymin
+::V+H/2-(H/(P+2))→Ymax
+::1→D
+:End
+:If 72≤K and K≤74:Then:K-72+7→P:End
+:If 82≤K and K≤84:Then:K-82+4→P:End
+:If 92≤K and K≤94:Then:K-92+1→P:End
+:If K=105:Then:0→L:End
+:If K=15:Then:1→L:End
+:End
