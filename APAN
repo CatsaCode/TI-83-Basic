@@ -1,5 +1,3 @@
-ʟAPAN
-
 :"Pan with        arrow keys
 :"Zoom with       + and -         Set axis with   '(' > X         ')' > Y         ',' > BOTH
 :"Set precision   with 1-9
@@ -9,79 +7,81 @@
 :
 :
 :
-:"P precision
-:"L live
-:"D need redraw
-:"S scale axis
-:"K key
-:"W width
-:"H height
-:"U center X
-:"V center Y
+:9→dim(ʟAPAN)
+:"1 precision
+:"2 live
+:"3 need redraw
+:"4 scale axis 
+:"5 key
+:"6 width 
+:"7 height
+:"8 center X
+:"9 center Y
 :
-:2→P
-:1→L
-:1→D
-:0→S
+:2→ʟAPAN(1)
+:1→ʟAPAN(2)
+:1→ʟAPAN(3)
+:0→ʟAPAN(4)
 :While 1
-:getKey→K
-:Xmax-Xmin→W
-:Ymax-Ymin→H
-:(Xmin+Xmax)/2→U
-:(Ymin+Ymax)/2→V
-:If K=45:Then
+:getKey→ʟAPAN(5)
+:Xmax-Xmin→ʟAPAN(6)
+:Ymax-Ymin→ʟAPAN(7)
+:(Xmin+Xmax)/2→ʟAPAN(8)
+:(Ymin+Ymax)/2→ʟAPAN(9)
+:If ʟAPAN(5)=45:Then
+::DelVar ʟAPAN
 ::Stop
 :End
-:If L and D and K=0:Then
-::0→D
+:If ʟAPAN(2) and ʟAPAN(3) and K=0:Then
+::0→ʟAPAN(3)
 ::DispGraph
 :End
-:If K=24:Then
-::Xmin-W/P→Xmin
-::Xmax-W/P→Xmax
-::1→D
+:If ʟAPAN(5)=24:Then
+::Xmin-ʟAPAN(6)/ʟAPAN(1)→Xmin
+::Xmax-ʟAPAN(6)/ʟAPAN(1)→Xmax
+::1→ʟAPAN(3)
 :End
-:If K=26:Then
-::Xmin+W/P→Xmin
-::Xmax+W/P→Xmax
-::1→D
+:If ʟAPAN(5)=26:Then
+::Xmin+ʟAPAN(6)/ʟAPAN(1)→Xmin
+::Xmax+ʟAPAN(6)/ʟAPAN(1)→Xmax
+::1→ʟAPAN(3)
 :End
-:If K=25:Then
-::Ymin+H/P→Ymin
-::Ymax+H/P→Ymax
-::1→D
+:If ʟAPAN(5)=25:Then
+::Ymin+ʟAPAN(7)/ʟAPAN(1)→Ymin
+::Ymax+ʟAPAN(7)/ʟAPAN(1)→Ymax
+::1→ʟAPAN(3)
 :End
-:If K=34:Then
-::Ymin-H/P→Ymin
-::Ymax-H/P→Ymax
-::1→D
+:If ʟAPAN(5)=34:Then
+::Ymin-ʟAPAN(7)/ʟAPAN(1)→Ymin
+::Ymax-ʟAPAN(7)/ʟAPAN(1)→Ymax
+::1→ʟAPAN(3)
 :End
-:If K=85:Then
-::If S≠2:Then
-:::U-W/2-(W/P)→Xmin
-:::U+W/2+(W/P)→Xmax
+:If ʟAPAN(5)=85:Then
+::If ʟAPAN(4)≠2:Then
+:::ʟAPAN(8)-ʟAPAN(6)/2-(ʟAPAN(6)/ʟAPAN(1))→Xmin
+:::ʟAPAN(8)+ʟAPAN(6)/2+(ʟAPAN(6)/ʟAPAN(1))→Xmax
 ::End
-::If S≠1:Then
-:::V-H/2-(H/P)→Ymin
-:::V+H/2+(H/P)→Ymax
+::If ʟAPAN(4)≠1:Then
+:::ʟAPAN(9)-ʟAPAN(7)/2-(ʟAPAN(7)/ʟAPAN(1))→Ymin
+:::ʟAPAN(9)+ʟAPAN(7)/2+(ʟAPAN(7)/ʟAPAN(1))→Ymax
 ::End
-::1→D
+::1→ʟAPAN(3)
 :End
-:If K=95:Then
-::If S≠2:Then
-:::U-W/2+(W/(P+2))→Xmin
-:::U+W/2-(W/(P+2))→Xmax
+:If ʟAPAN(5)=95:Then
+::If ʟAPAN(4)≠2:Then
+:::ʟAPAN(8)-ʟAPAN(6)/2+(ʟAPAN(6)/(ʟAPAN(1)+2))→Xmin
+:::ʟAPAN(8)+ʟAPAN(6)/2-(ʟAPAN(6)/(ʟAPAN(1)+2))→Xmax
 ::End
-::If S≠1:Then
-:::V-H/2+(H/(P+2))→Ymin
-:::V+H/2-(H/(P+2))→Ymax
+::If ʟAPAN(4)≠1:Then
+:::ʟAPAN(9)-ʟAPAN(7)/2+(ʟAPAN(7)/(ʟAPAN(1)+2))→Ymin
+:::ʟAPAN(9)+ʟAPAN(7)/2-(ʟAPAN(7)/(ʟAPAN(1)+2))→Ymax
 ::End
-::1→D
+::1→ʟAPAN(3)
 :End
-:If 62≤K and K≤64:Then:K-62+0→S:End
-:If 72≤K and K≤74:Then:K-72+7→P:End
-:If 82≤K and K≤84:Then:K-82+4→P:End
-:If 92≤K and K≤94:Then:K-92+1→P:End
-:If K=105:Then:0→L:End
-:If K=15:Then:1→L:End
+:If 62≤ʟAPAN(5) and ʟAPAN(5)≤64:Then:ʟAPAN(5)-62+0→ʟAPAN(4):End
+:If 72≤ʟAPAN(5) and ʟAPAN(5)≤74:Then:ʟAPAN(5)-72+7→ʟAPAN(1):End
+:If 82≤ʟAPAN(5) and ʟAPAN(5)≤84:Then:ʟAPAN(5)-82+4→ʟAPAN(1):End
+:If 92≤ʟAPAN(5) and ʟAPAN(5)≤94:Then:ʟAPAN(5)-92+1→ʟAPAN(1):End
+:If ʟAPAN(5)=105:Then:0→ʟAPAN(2):End
+:If ʟAPAN(5)=15:Then:1→ʟAPAN(2):End
 :End
