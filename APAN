@@ -1,28 +1,62 @@
-ʟAPAN
-
 :"Pan with        arrow keys
 :"Zoom with       + and -         Set axis with   '(' > X         ')' > Y         ',' > BOTH
 :"Set precision   with 1-9
 :"Set live        updates with   ENTER/GRAPH
+:"Quit with       CLEAR
 :
 :
 :
 :
 :
+:"ʟAPANS(1) subprogram
+:"ʟAPAN1 backup original vars
+:"ʟAPAN2 backup APAN vars
 :"P precision
 :"L live
-:"D need redraw
 :"S scale axis
+:"D need redraw
 :"K key
 :"W width
 :"H height
 :"U center X
 :"V center Y
 :
+:SetUpEditor APANS
+:If dim(ʟAPANS)=0:Then:{0}→ʟAPANS:End
+:If ʟAPANS(1)=11:Then
+:{P,L,S,D,K,W,H,U,V}→ʟAPAN1
+:Goto Q:End
+:If ʟAPANS(1)=12:Then
+:{P,L,S,D,K,W,H,U,V}→ʟAPAN2
+:Goto Q:End
+:If ʟAPANS(1)=21:Then
+:ʟAPAN1(1)→P
+:ʟAPAN1(2)→L
+:ʟAPAN1(3)→S
+:ʟAPAN1(4)→D
+:ʟAPAN1(5)→K
+:ʟAPAN1(6)→W
+:ʟAPAN1(7)→H
+:ʟAPAN1(8)→U
+:ʟAPAN1(9)→V
+:Goto Q:End
+:If ʟAPANS(1)=22:Then
+:ʟAPAN2(1)→P
+:ʟAPAN2(2)→L
+:ʟAPAN2(3)→S
+:ʟAPAN2(4)→D
+:ʟAPAN2(5)→K
+:ʟAPAN2(6)→W
+:ʟAPAN2(7)→H
+:ʟAPAN2(8)→U
+:ʟAPAN2(9)→V
+:Goto Q:End
+:
+:11→ʟAPANS(1):prgmAPAN
 :2→P
 :1→L
-:1→D
 :0→S
+:1→D
 :While 1
 :getKey→K
 :Xmax-Xmin→W
@@ -30,11 +64,14 @@
 :(Xmin+Xmax)/2→U
 :(Ymin+Ymax)/2→V
 :If K=45:Then
-::Stop
+::Goto C
 :End
 :If L and D and K=0:Then
 ::0→D
+::12→ʟAPANS(1):prgmAPAN
+::21→ʟAPANS(1):prgmAPAN
 ::DispGraph
+::22→ʟAPANS(1):prgmAPAN
 :End
 :If K=24:Then
 ::Xmin-W/P→Xmin
@@ -85,3 +122,12 @@
 :If K=105:Then:0→L:End
 :If K=15:Then:1→L:End
 :End
+:
+:Lbl C
+:21→ʟAPANS(1):prgmAPAN
+:DelVar ʟAPANS
+:DelVar ʟAPAN1
+:DelVar ʟAPAN2
+:SetUpEditor 
+:
+:Lbl Q
